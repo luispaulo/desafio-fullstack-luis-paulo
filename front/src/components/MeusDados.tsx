@@ -7,6 +7,7 @@ import { useUser } from '@/hooks/useUser.tsx';
   const { contract, loading } = useContracts();
   const { user} = useUser(contract?.user_id);
 
+  console.log(contract)
   return (
     <div className="flex flex-col items-center mt-4">
       {loading ? (
@@ -27,9 +28,17 @@ import { useUser } from '@/hooks/useUser.tsx';
           {contract.id ? (
             <div className="mb-4 p-4 border border-gray-300 rounded">
               <h2 className="text-2xl font-bold mb-4">Informações do Contrato Ativo</h2>
-              <h1>{contract.plan.description}</h1>
+              <p><strong>Plano:</strong>{contract.plan.description}</p>
               <p><strong>Preço:</strong> R$ {contract.price} /mês</p>
-              <p><strong>Situação:</strong> {contract.active ? 'Ativo' : 'Inativo'}</p>
+              <p><strong>Situação: </strong> 
+                                  {(() => {
+                                    switch (true) {
+                                      case contract.payments.length > 0:
+                                        return 'Plano Ativo';
+                                      case contract.payments.length >= 0:
+                                        return 'Plano Pendente de Pagamento';
+                                    }
+                                  })()}</p>
             </div>
           ) : (
             <p>Usuário sem contrato cadastrado.</p>

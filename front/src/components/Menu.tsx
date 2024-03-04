@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
  export const Menu = () => {
     return (
       <div className="flex justify-center mt-4">
+        <Link to="/" className="mx-2 bg-green-500 text-white px-4 py-2 rounded">
+          Home
+        </Link>
         <Link to="/plan" className="mx-2 bg-green-500 text-white px-4 py-2 rounded">
           Planos Disponiveis
         </Link>
