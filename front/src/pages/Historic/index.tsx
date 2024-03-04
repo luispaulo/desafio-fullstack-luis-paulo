@@ -8,6 +8,8 @@ export const UserHistoryPage = () => {
   const { userHistory, loading } = useUserHistory(1);
   const navigate = useNavigate();
 
+  console.log(userHistory)
+
   if (loading) {
     return <p>Carregando...</p>;
   }
@@ -27,19 +29,19 @@ export const UserHistoryPage = () => {
             <table className="table-auto border-collapse w-96">
               <thead>
                 <tr>
-                  <th className="border px-4 py-2">Descrição do Plano</th>
-                  <th className="border px-4 py-2">Valor</th>
-                  <th className="border px-4 py-2">Desconto</th>
-                  <th className="border px-4 py-2">Data de Pagamento</th>
+                  <th className="border px-8 py-2">Descrição do Plano</th>
+                  <th className="border px-10 py-2">Valor</th>
+                  <th className="border px-8 py-2">Desconto</th>
+                  <th className="border px-8 py-2">Data de Pagamento</th>
                 </tr>
               </thead>
               <tbody>
                 {userHistory.map((historyItem) => (
                   <tr key={historyItem.id}>
-                    <td className="border px-4 py-2">{historyItem.plan_description}</td>
-                    <td className="border px-4 py-2">R$ {historyItem.value}</td>
-                    <td className="border px-4 py-2">R$ {historyItem.discount}</td>
-                    <td className="border px-4 py-2">{historyItem.payment_date}</td>
+                    <td className="border px-8 py-2">{historyItem?.plan.description}</td>
+                    <td className="border px-10 py-2">R$ {historyItem?.plan.price}</td>
+                    <td className="border px-8 py-2">R$ {historyItem?.payments[0].price_contracted}</td>
+                    <td className="border px-8 py-2">{historyItem?.payments[0].formatted_created_at}</td>
                   </tr>
                 ))}
               </tbody>

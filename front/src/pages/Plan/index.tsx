@@ -38,6 +38,7 @@ export const Plan = () => {
   return (
     <div>
       <Menu />
+      <h1 className="align-middle text-orange-500 text-3xl font-bold text-center pb-5">Planos Disponíveis</h1>
       {loading && <p>Carregando...</p>}
 
       {!loading && planList.length === 0 && <p>Nenhum plano encontrado.</p>}
