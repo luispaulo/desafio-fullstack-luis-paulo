@@ -7,7 +7,7 @@ export const usePlan = () => {
   useEffect(() => {
     const fetchPlans = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/plans/');
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/plans/`);
         if (!response.ok) {
           throw new Error(`Erro ao obter os planos: ${response.statusText}`);
         }

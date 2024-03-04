@@ -1,4 +1,5 @@
 import { Menu } from "@/components/Menu"
+import { MeusDados } from "@/components/MeusDados"
 
 export const Home = () => {
   return (
@@ -7,6 +8,7 @@ export const Home = () => {
         Desafio para Desenvolvedor - Inmediam
       </h1>
       <Menu />
+      <MeusDados />
     </div>
   )
 }

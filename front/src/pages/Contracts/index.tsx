@@ -7,13 +7,12 @@ export const Contracts = () => {
   const { contract: contract, loading } = useContracts(); 
   const navigate = useNavigate()
 
-  console.log(contract)
   if (loading) {
     return <p>Carregando...</p>;
   }
   const onClickPayment = async (userId, planId, price) => {
     try {
-      const response = await fetch('http://localhost:8000/api/contracts/pay', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/contracts/pay`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,7 +32,7 @@ export const Contracts = () => {
 
       const contractData = await response.json();
 
-      navigate(`/contracts`);
+      navigate(`/`);
     } catch (error) {
       console.error('Erro ao criar contrato:', error);
     }

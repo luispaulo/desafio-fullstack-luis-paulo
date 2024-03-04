@@ -7,7 +7,7 @@ export const useContracts = () => {
   useEffect(() => {
     const fetchContractDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/contracts/1`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/contracts/1`);
         if (!response.ok) {
           throw new Error(`Erro ao obter os detalhes do contrato: ${response.statusText}`);
         }
