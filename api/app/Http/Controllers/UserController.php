@@ -15,6 +15,12 @@ class UserController extends Controller
      */
     public function show()
     {
-        return User::find(1);
+        return User::all();
     }
+
+    public function getUserById($id)
+    {
+        return User::find($id);
+    }
+    
 }

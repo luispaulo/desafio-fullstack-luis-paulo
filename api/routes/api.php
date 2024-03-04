@@ -26,6 +26,7 @@ Route::get('/', function () {
 
 Route::prefix('user')->group( function () {
     Route::get('/', [UserController::class, 'show']);
+    Route::get('/{userId}', [UserController::class, 'getUserById']);
 });
 
 Route::prefix('plans')->group(function () {
