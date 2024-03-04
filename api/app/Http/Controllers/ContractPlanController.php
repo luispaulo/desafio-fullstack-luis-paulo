@@ -26,6 +26,20 @@ class ContractPlanController extends Controller
         return \response()->json($contractPlans);
     }
 
+    public function userHistory(int $userId)
+    {
+        try {
+            $contract = $this->contractPlanService->userHistory($userId);
+
+            return \response()->json($contract);
+        } catch (HttpException $e) {
+            return \response()->json([
+                'message' => $e->getMessage()
+            ], $e->getStatusCode());
+        }
+    }
+
+
     public function show(int $userId)
     {
         try {

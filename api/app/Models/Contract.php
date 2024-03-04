@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Contract extends Model
 {
-    use SoftDeletes;
+
+    protected $hidden = ['created_at', 'updated_at'];
 
     protected $fillable = [
         'price', 'active', 'user_id', 'plan_id', 'hiring_date'

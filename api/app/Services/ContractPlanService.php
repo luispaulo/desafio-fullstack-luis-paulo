@@ -36,9 +36,14 @@ class ContractPlanService
                 ->first();
     }
 
-    public function gethistoricByUserId($userId)
+    public function userHistory($userId)
     {
-        return Contract::all();
+        return Contract::where('user_id', '=', $userId)
+            ->with(['plan',
+            'payments' => function ($query) {
+                $query
+                    ->select('id' ,'contract_id', 'price_contracted' , 'balance', 'type_invoice', 'type_payment', 'status');
+            }])->get();
     }
 
     public function saveContract(int $userId,int $planId): void

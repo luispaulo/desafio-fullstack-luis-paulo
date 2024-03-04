@@ -38,7 +38,7 @@ Route::prefix('contracts')->group(function () {
     Route::get('/', [ContractPlanController::class, 'index']);
     Route::get('/historic/{userId}', [ContractPlanController::class, 'historic']);
     Route::get('/{userId}', [ContractPlanController::class, 'show']);
+    Route::get('/{userId}/userHistory', [ContractPlanController::class, 'userHistory']);
     Route::post('/', [ContractPlanController::class, 'store']);
     Route::post('/pay', [ContractPlanController::class, 'storePay']);
-
 });
