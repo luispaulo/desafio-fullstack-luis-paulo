@@ -14,7 +14,7 @@ class Contract extends Model
     protected $hidden = ['created_at', 'updated_at'];
 
     protected $fillable = [
-        'price', 'active', 'user_id', 'plan_id', 'hiring_date'
+        'price', 'active', 'user_id', 'plan_id', 'hiring_date', 'created_at', 'updated_at'
     ];
 
     public function payments(): HasMany

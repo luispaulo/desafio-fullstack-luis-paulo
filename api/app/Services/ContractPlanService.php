@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Contract;
 use App\Services\PaymentService;
 use App\Enums\PaymentEnum;
+use Carbon\Carbon;
 
 class ContractPlanService
 {
@@ -38,12 +39,20 @@ class ContractPlanService
 
     public function userHistory($userId)
     {
-        return Contract::where('user_id', '=', $userId)
-            ->with(['plan',
-            'payments' => function ($query) {
-                $query
-                    ->select('id' ,'contract_id', 'price_contracted' , 'balance', 'type_invoice', 'type_payment', 'status');
-            }])->get();
+        $contracts = Contract::where('user_id', '=', $userId)
+        ->with(['plan', 'payments' => function ($query) {
+            $query->select('id', 'contract_id', 'price_contracted', 'balance', 'type_invoice', 'type_payment', 'status', 'created_at', 'updated_at');
+        }])->get();
+        
+    $contracts->transform(function ($contract) {
+        $contract->payments->transform(function ($payment) {
+            $payment->formatted_created_at = Carbon::parse($payment->created_at)->format('d/m/Y');
+            return $payment;
+        });
+        return $contract;
+    });
+
+    return $contracts;
     }
 
     public function saveContract(int $userId,int $planId): void
