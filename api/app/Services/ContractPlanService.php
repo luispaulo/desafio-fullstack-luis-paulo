@@ -42,8 +42,10 @@ class ContractPlanService
         $contracts = Contract::where('user_id', '=', $userId)
         ->with(['plan', 'payments' => function ($query) {
             $query->select('id', 'contract_id', 'price_contracted', 'balance', 'type_invoice', 'type_payment', 'status', 'created_at', 'updated_at');
-        }])->get();
-        
+        }])
+            ->orderBy('created_at', 'desc')
+                ->get();
+
     $contracts->transform(function ($contract) {
         $contract->payments->transform(function ($payment) {
             $payment->formatted_created_at = Carbon::parse($payment->created_at)->format('d/m/Y');

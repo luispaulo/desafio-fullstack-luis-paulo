@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
           Planos Disponiveis
         </Link>
         <Link to="/contracts" className="mx-2 bg-purple-500 text-white px-4 py-2 rounded">
-          Plano Atual
+          Pagamento
         </Link>
         <Link to="/historic" className="mx-2 bg-red-500 text-white px-4 py-2 rounded">
           Historico de assinatura

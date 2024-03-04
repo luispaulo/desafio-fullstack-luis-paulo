@@ -40,8 +40,8 @@ export const UserHistoryPage = () => {
                   <tr key={historyItem.id}>
                     <td className="border px-8 py-2">{historyItem?.plan.description}</td>
                     <td className="border px-10 py-2">R$ {historyItem?.plan.price}</td>
-                    <td className="border px-8 py-2">R$ {historyItem?.payments[0].price_contracted}</td>
-                    <td className="border px-8 py-2">{historyItem?.payments[0].formatted_created_at}</td>
+                    <td className="border px-8 py-2">R$ {historyItem?.payments[0]?.price_contracted ? historyItem?.payments[0]?.price_contracted : '0,00'}</td>
+                    <td className="border px-8 py-2">{historyItem?.payments[0]?.formatted_created_at ? historyItem?.payments[0]?.formatted_created_at : 'Pendente de Pagamento'}</td>
                   </tr>
                 ))}
               </tbody>

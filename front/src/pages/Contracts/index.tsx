@@ -6,7 +6,7 @@ import { Menu } from "@/components/Menu"
 export const Contracts = () => {
   const { contract: contract, loading } = useContracts(); 
   const navigate = useNavigate()
-
+  console.log(contract);
   if (loading) {
     return <p>Carregando...</p>;
   }
@@ -43,7 +43,7 @@ export const Contracts = () => {
       <Menu />
       <div className="grid justify-center">
       <div className="justify-center">
-        <h1 className="align-middle text-orange-500 text-3xl font-bold text-center pb-5">Plano Atual</h1>
+        <h1 className="align-middle text-orange-500 text-3xl font-bold text-center pb-5">Pagamento do Plano</h1>
         <div className="box-content bg-white h-72 w-96 pr-0 pt-7 rounded-lg shadow-lg">
           {!contract?.plan && (
             <h1 className="text-gray-700 text-xl text-center">
@@ -82,7 +82,7 @@ export const Contracts = () => {
                     onClick={() => onClickPayment(1, contract?.plan?.id, contract?.plan?.price)}
                     className={`align-middle text-center bg-gray-700 hover:bg-gray-800 text-white p-3 rounded-lg shadow-lg w-full }`}
                   >
-                    {contract?.payments.status != 'paid' ? 'Plano Pendente de Pagamento' : 'Plano Pago'}
+                    {contract?.payments[0]?.status != 'pending' ? 'Plano Pendente de Pagamento' : 'Plano Pago'}
                   </button>
                   </div>
             </>

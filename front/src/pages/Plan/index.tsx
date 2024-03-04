@@ -7,7 +7,7 @@ import React from 'react';
 export const Plan = () => {
   const { plan: planList, loading } = usePlan(); 
   const { contract: contract } = useContracts(); 
-  console.log(contract);
+  console.log(contract?.payments);
   const navigate = useNavigate()
 
   const onClickChoosePlan = async (userId, planId) => {
@@ -80,7 +80,16 @@ export const Plan = () => {
                     className={`align-middle text-center bg-gray-700 hover:bg-gray-800 text-white p-3 rounded-lg shadow-lg w-full ${plan.id === contract?.plan_id ? 'opacity-50 cursor-not-allowed' : ''}`}
                     disabled={plan.id === contract?.plan_id}
                   >
-                    {plan.id === contract?.plan_id ? 'Plano Ativo' : 'Escolher Plano'}
+                    {(() => {
+                      switch (true) {
+                        case plan.id === contract?.plan_id && contract.payments.length > 0:
+                          return 'Plano Ativo';
+                        case plan.id === contract?.plan_id && contract.payments.length >= 0:
+                          return 'Plano Pendente de Pagamento';
+                        default:
+                          return 'Escolher Plano';
+                      }
+                    })()}
                   </button>
                   </div>
                 </div>
