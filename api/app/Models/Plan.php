@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Plan extends Model
 {
     protected $fillable = [
-        'description','numberOfClients','gigabytesStorage','price'
+        'id','description','numberOfClients','gigabytesStorage','price','active'
     ]; 
 }
