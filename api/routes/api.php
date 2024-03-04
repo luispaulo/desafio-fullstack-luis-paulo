@@ -3,6 +3,7 @@
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContractPlanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,20 @@ Route::get('/', function () {
     return response()->json(['message' => 'ok']);
 });
 
-Route::apiResource('plans', PlanController::class, ['only' => 'index']);
+Route::prefix('user')->group( function () {
+    Route::get('/', [UserController::class, 'show']);
+});
 
-Route::apiSingleton('user', UserController::class, ['only' => 'show']);
+Route::prefix('plans')->group(function () {
+    Route::get('/', [PlanController::class, 'index']);
+    Route::get('/{id}', [PlanController::class, 'show']);
+});
+
+Route::prefix('contracts')->group(function () {
+    Route::get('/', [ContractPlanController::class, 'index']);
+    Route::get('/historic/{userId}', [ContractPlanController::class, 'historic']);
+    Route::get('/{userId}', [ContractPlanController::class, 'show']);
+    Route::post('/', [ContractPlanController::class, 'store']);
+    Route::post('/pay', [ContractPlanController::class, 'storePay']);
+
+});
